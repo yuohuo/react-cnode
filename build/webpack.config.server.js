@@ -1,20 +1,22 @@
 const path = require("path");
-const HTMLPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  target: "node",
   entry: {
-    app: path.join(__dirname, "../client/app.js")
+    app: path.join(__dirname, "../client/server-entry.js")
   },
   output: {
-    filename: "[name].[hash].js",
+    filename: "server-entry.js",
     path: path.join(__dirname, "../dist"),
-    publicPath: ""
+    publicPath: "/public",
+    libraryTarget: "commonjs2"
   },
   module: {
     rules: [
       {
         test: /.jsx$/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        exclude: [path.join(__dirname, "../node_modules")]
       },
       {
         test: /.js$/,
@@ -22,6 +24,5 @@ module.exports = {
         exclude: [path.join(__dirname, "../node_modules")]
       }
     ]
-  },
-  plugins: [new HTMLPlugin()]
+  }
 };
