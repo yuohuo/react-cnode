@@ -1,3 +1,3 @@
 import React from 'react'
 
-export default () => <div>App123</div>
+export default () => <div>App</div>

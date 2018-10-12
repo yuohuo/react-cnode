@@ -16,6 +16,8 @@
     "comma-dangle": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "import/no-extraneous-dependencies": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
