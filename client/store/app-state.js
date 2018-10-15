@@ -2,7 +2,7 @@ import {
   observable, computed, autorun, action
 } from 'mobx'
 
-export class AppState {  //eslint-disable-line
+export class AppState {
   @observable count = 0
 
   @observable name = 'Jokey'
@@ -23,7 +23,7 @@ export class AppState {  //eslint-disable-line
 const appState = new AppState()
 
 autorun(() => {
-  console.log(appState.msg)
+  console.log(appState.msg) //eslint-disable-line
 })
 
 setInterval(() => {
