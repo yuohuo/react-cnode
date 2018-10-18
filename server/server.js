@@ -1,12 +1,29 @@
 const express = require('express')
 const reactSSR = require('react-dom/server')
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const fs = require('fs')
 const path = require('path')
 
+const isDev = process.env.NODE_ENV === 'development'
+
 console.log('Initializing server application...')
+
 const app = express()
 
-const isDev = process.env.NODE_ENV === 'development'
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(session({
+  maxAge: 10 * 60 * 1000,
+  name: 'tid',
+  resave: false,
+  saveUninitialized: false,
+  secret: 'react cnode'
+}))
+
+app.use('/api/user', require('./util/handleLogin'))
+app.use('/api', require('./util/proxy'))
 
 if (!isDev) {
   const serverEntry = require('../dist/server-entry').default //eslint-disable-line

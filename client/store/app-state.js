@@ -26,8 +26,8 @@ autorun(() => {
   console.log(appState.msg) //eslint-disable-line
 })
 
-setInterval(() => {
-  appState.add()
-}, 1000)
+// setInterval(() => {
+//   appState.add()
+// }, 1000)
 
 export default appState
