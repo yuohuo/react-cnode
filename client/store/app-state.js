@@ -1,8 +1,8 @@
 import {
-  observable, computed, autorun, action
+  observable, computed, action
 } from 'mobx'
 
-export class AppState {
+export default class AppState {
   @observable count = 0
 
   @observable name = 'Jokey'
@@ -20,14 +20,14 @@ export class AppState {
   }
 }
 
-const appState = new AppState()
+// const appState = new AppState()
 
-autorun(() => {
-  console.log(appState.msg) //eslint-disable-line
-})
+// // autorun(() => {
+// //   console.log(appState.msg) //eslint-disable-line
+// // })
 
-// setInterval(() => {
-//   appState.add()
-// }, 1000)
+// // setInterval(() => {
+// //   appState.add()
+// // }, 1000)
 
-export default appState
+// export default appState

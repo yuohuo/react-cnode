@@ -46,6 +46,7 @@ console.log('Compiling bundle...')
 const Module = module.constructor
 const mfs = new MemoryFs()
 let serverBundle
+let createStoreMap
 
 // create a webpack compiler and emit the output file into memory-fs
 const serverCompiler = webpack(serverConfig)
@@ -76,9 +77,10 @@ serverCompiler.watch({}, (err, stats) => {
   const m = new Module()
   m._compile(bundle, serverConfig.output.filename) //eslint-disable-line
   serverBundle = m.exports.default
+  createStoreMap = m.exports.createStoreMap //eslint-disable-line
 })
 
-module.exports = function(app) {
+module.exports = (app) => {
   // proxy static files to webpack-dev-server URL
   app.use(
     '/public',
@@ -88,7 +90,9 @@ module.exports = function(app) {
   )
   app.get('*', (req, res) => {
     getTemplate().then((template) => {
-      const content = ReactDomServer.renderToString(serverBundle)
+      const routerContext = {}
+      const appBundle = serverBundle(createStoreMap(), routerContext, req.url)
+      const content = ReactDomServer.renderToString(appBundle)
       res.send(template.replace('<!-- app -->', content))
     })
   })

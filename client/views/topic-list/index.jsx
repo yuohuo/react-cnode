@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types'
 
-import { AppState } from '../../store/app-state'
+import AppState from '../../store/app-state'
 
 // const TopicList = () => <div>This is topic list</div>
 // export default TopicList
